@@ -4,12 +4,27 @@
     <meta charset="utf-8">
     <title>Intro to AJAX Practice Tasks</title>
     <script src="src/index.js" charset="utf-8"></script>
+    <style>
+      #dog-image-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around; 
+        gap: 10px; 
+        padding: 10px;
+      }
+      #dog-image-container img {
+        max-width: 200px; /* Set a max width for images */
+        height: auto; /* Maintain aspect ratio */
+        border-radius: 8px; /* Optional: Rounded corners */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Shadow for better visuals */
+      }
+    </style>
   </head>
   <body>
     <h1>Dog CEO</h1>
 
     <div id="dog-image-container">
-      <!-- images here -->
+      
     </div>
 
     <hr>
