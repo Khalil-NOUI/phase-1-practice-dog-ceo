@@ -17,7 +17,7 @@ async function fetcherAll(ref, callBack) {
         callBack(data);
     }
     catch(err) {
-        console.log("error !", err.message);
+        displayError(err.message);
     };
 }
 
@@ -32,18 +32,58 @@ function imgRender(data) {
         const img = document.createElement('img');
         img.src = url;
         img.alt = `dog picture`;
+        img.loading = "lazy";
         fragment.appendChild(img);
     });
     imgDisplayer.appendChild(fragment)
 };
 
+
+
 function breedRender(data) {
+
     const breedDisplayer = document.getElementById("dog-breeds");
     const fragment = document.createDocumentFragment()
+    const input = document.getElementById("breed-dropdown");
+    ////////////
+
+    breedDisplayer.addEventListener("click", (e) => {
+        e.target.style.color = "Green"
+    })
+
+    ////////////
+
     Object.keys(data.message).forEach((ele) => {
         const breedItem = document.createElement("li");
         breedItem.textContent = `${ele}`
         breedDisplayer.appendChild(breedItem)
     })
     breedDisplayer.appendChild(fragment)
+
+    /////////////
+    input.addEventListener("change", (e) => {
+    breedFilter(breedDisplayer, data, e)
+    })
 };
+
+
+function breedFilter(breedDisplayer, data, e) {
+    const fragment = document.createDocumentFragment()
+    breedDisplayer.replaceChildren();
+
+        Object.keys(data.message).forEach((ele) => {
+
+            if (ele.startsWith(e.target.value)) {
+
+            const breedItem = document.createElement("li");
+            breedItem.textContent = `${ele}`
+            fragment.appendChild(breedItem)
+            }
+            else {
+                null
+            };
+            
+        });
+
+        breedDisplayer.appendChild(fragment);
+    };
